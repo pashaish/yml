@@ -9,8 +9,18 @@ public:
 	std::vector<IProp*>* get_children() override;
 	void set_position(sf::Vector2f *pos) override;
 	sf::Vector2f *get_position() override;
+	float get_friction() override;
+	void set_friction(float friction) override;
+	float get_density() override;
+	void set_density(float density) override;
+	b2BodyType get_body_type() override;
+	void set_body_type(b2BodyType type) override;
+	sf::Vector2f *get_center_position() override;
 protected:
 	std::vector<IProp*>* children;
 	sf::Vector2f *position;
+	b2BodyType body_type = b2_staticBody;
+	float density = 0;
+	float friction = 0.05;
 };
 

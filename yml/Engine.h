@@ -12,7 +12,7 @@ public:
 	}
 	void run();
 	void stop();
-private:
+protected:
 	bool is_start = false;
 	IScene *scene;
 	std::vector<IProcessor*> *processors;

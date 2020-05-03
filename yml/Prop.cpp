@@ -25,3 +25,38 @@ sf::Vector2f* Prop::get_position()
 {
 	return this->position;
 }
+
+float Prop::get_friction()
+{
+	return this->friction;
+}
+
+void Prop::set_friction(float friction)
+{
+	this->friction = friction;
+}
+
+float Prop::get_density()
+{
+	return this->density;
+}
+
+void Prop::set_density(float density)
+{
+	this->density = density;
+}
+
+b2BodyType Prop::get_body_type()
+{
+	return this->body_type;
+}
+
+void Prop::set_body_type(b2BodyType type)
+{
+	this->body_type = type;
+}
+
+sf::Vector2f *Prop::get_center_position()
+{
+	return this->position;
+}

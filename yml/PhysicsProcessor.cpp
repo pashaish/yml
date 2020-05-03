@@ -3,7 +3,7 @@
 
 PhysicsProcessor::PhysicsProcessor()
 {
-	this->world = new b2World(b2Vec2(1, 10));
+	this->world = new b2World(b2Vec2(0.5, 10));
 	this->bodies = new std::map<IProp*, b2Body*>();
 }
 
@@ -15,45 +15,50 @@ void PhysicsProcessor::process(std::vector<IProp*>* props)
 		auto* body = this->get_body(prop);
 		const auto pos = body->GetPosition();
 
-		
 		prop->set_position(new sf::Vector2f(pos.x, pos.y));
 	}
 }
 
 b2Body* PhysicsProcessor::get_body(IProp* prop) const
 {
+	b2Body *body;
+
 	if (this->bodies->find(prop) == this->bodies->end())
 	{
 		auto* def = new b2BodyDef();
-		def->type = b2_dynamicBody;
-		def->gravityScale = 3;
-
+		def->gravityScale = 10;
+		def->type = prop->get_body_type();
+		
 		const sf::Vector2f* position = prop->get_position();
 
 		def->position.Set(position->x, position->y);
 
-		auto* body = this->world->CreateBody(def);
-
-		auto* mass = new b2MassData();
-		mass->mass = 10;
-		body->SetMassData(mass);
-
-		auto* fixture_def = new b2FixtureDef();
-		fixture_def->shape = prop->create_shape();
-		fixture_def->density = 1.0f;
-		fixture_def->friction = 0.3f;
-		
-		body->CreateFixture(fixture_def);
+		body = this->world->CreateBody(def);
 
 		std::pair<IProp*, b2Body*> pair(prop, body);
 
 		this->bodies->insert(pair);
-
-		return body;
-		
 	} else
 	{
-		return this->bodies->at(prop);
+		body = this->bodies->at(prop);
+	}
+
+	auto* fixture = body->GetFixtureList();
+	
+	if (fixture == nullptr || prop->get_density() != fixture->GetDensity() || prop->get_friction() != fixture->GetFriction())
+	{
+		auto* fixture_def = new b2FixtureDef();
+		fixture_def->shape = prop->create_shape();
+		
+		fixture_def->density = prop->get_density();
+		fixture_def->friction = prop->get_friction();
+		
+		body->DestroyFixture(fixture);
+		body->SetType(prop->get_body_type());
+		
+		body->CreateFixture(fixture_def);
 	}
 	
+	
+	return body;
 }

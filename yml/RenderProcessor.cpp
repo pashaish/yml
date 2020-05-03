@@ -12,7 +12,7 @@ void RenderProcessor::process(std::vector<IProp*>* props)
 	auto prop_render = [this](IProp* prop)
 	{
 		prop->render(this->window);
-		for (auto ch : *prop->get_children())
+		for (auto *ch : *prop->get_children())
 		{
 			ch->render(this->window);
 		}
@@ -21,6 +21,5 @@ void RenderProcessor::process(std::vector<IProp*>* props)
 	for (IProp *prop : *props) {
 		prop_render(prop);
 	}
-	
 	this->window->display();
 }
