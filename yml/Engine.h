@@ -1,6 +1,6 @@
 #pragma once
-#include "./IScene.h";
-#include "./IProcessor.h";
+#include "./IScene.h"
+#include "./IProcessor.h"
 #include <vector>
 
 class Engine

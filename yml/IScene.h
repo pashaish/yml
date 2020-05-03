@@ -4,7 +4,5 @@
 
 class IScene {
 public:
-	virtual std::vector<IProp*>* get_props() {
-		return {};
-	};
+	virtual std::vector<IProp*>* get_props() = 0;
 };

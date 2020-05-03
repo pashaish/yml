@@ -28,6 +28,12 @@
     <Filter Include="Исходные файлы\processor">
       <UniqueIdentifier>{7516cba7-1b56-445c-8844-33e0b418c0e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\prop">
+      <UniqueIdentifier>{00f4b4de-1bd0-4f5a-999c-840dca27c88e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\prop">
+      <UniqueIdentifier>{331fc5c7-5538-495f-96e1-8c3728da7c0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yml.cpp">
@@ -40,6 +46,15 @@
       <Filter>Исходные файлы\scene</Filter>
     </ClCompile>
     <ClCompile Include="RenderProcessor.cpp">
+      <Filter>Исходные файлы\processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Prop.cpp">
+      <Filter>Исходные файлы\prop</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Исходные файлы\prop</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsProcessor.cpp">
       <Filter>Исходные файлы\processor</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,6 +78,15 @@
       <Filter>Файлы заголовков\scene</Filter>
     </ClInclude>
     <ClInclude Include="RenderProcessor.h">
+      <Filter>Файлы заголовков\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Prop.h">
+      <Filter>Файлы заголовков\prop</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Файлы заголовков\prop</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsProcessor.h">
       <Filter>Файлы заголовков\processor</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #pragma once
 #include "IProcessor.h"
-#include <SFML/Graphics.hpp>;
+#include <SFML/Graphics.hpp>
 
 class RenderProcessor :
 	public IProcessor
