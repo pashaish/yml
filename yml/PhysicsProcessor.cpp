@@ -3,19 +3,21 @@
 
 PhysicsProcessor::PhysicsProcessor()
 {
-	this->world = new b2World(b2Vec2(0.5, 10));
+	this->world = new b2World(b2Vec2(0, 10));
 	this->bodies = new std::map<IProp*, b2Body*>();
 }
 
 void PhysicsProcessor::process(std::vector<IProp*>* props)
 {
+	this->world->Step(1, 6, 2);
+
 	for (auto* prop : *props)
 	{
-		this->world->Step(60, 6, 2);
 		auto* body = this->get_body(prop);
 		const auto pos = body->GetPosition();
 
 		prop->set_position(new sf::Vector2f(pos.x, pos.y));
+		prop->set_rotation(body->GetAngle());
 	}
 }
 
@@ -26,7 +28,7 @@ b2Body* PhysicsProcessor::get_body(IProp* prop) const
 	if (this->bodies->find(prop) == this->bodies->end())
 	{
 		auto* def = new b2BodyDef();
-		def->gravityScale = 10;
+		def->angle = prop->get_rotation();
 		def->type = prop->get_body_type();
 		
 		const sf::Vector2f* position = prop->get_position();
@@ -45,10 +47,15 @@ b2Body* PhysicsProcessor::get_body(IProp* prop) const
 
 	auto* fixture = body->GetFixtureList();
 	
-	if (fixture == nullptr || prop->get_density() != fixture->GetDensity() || prop->get_friction() != fixture->GetFriction())
+	if (fixture == nullptr 
+		|| prop->get_density() != fixture->GetDensity() 
+		|| prop->get_friction() != fixture->GetFriction()
+		)
 	{
+		
 		auto* fixture_def = new b2FixtureDef();
 		fixture_def->shape = prop->create_shape();
+		fixture_def->restitution = 1;
 		
 		fixture_def->density = prop->get_density();
 		fixture_def->friction = prop->get_friction();

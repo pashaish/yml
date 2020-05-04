@@ -60,3 +60,13 @@ sf::Vector2f *Prop::get_center_position()
 {
 	return this->position;
 }
+
+float Prop::get_rotation()
+{
+	return this->rotation;
+}
+
+void Prop::set_rotation(float rotation)
+{
+	this->rotation = rotation;
+}

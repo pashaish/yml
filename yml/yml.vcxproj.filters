@@ -57,6 +57,9 @@
     <ClCompile Include="PhysicsProcessor.cpp">
       <Filter>Исходные файлы\processor</Filter>
     </ClCompile>
+    <ClCompile Include="ControlPhysicsProcessor.cpp">
+      <Filter>Исходные файлы\processor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,6 +90,9 @@
       <Filter>Файлы заголовков\prop</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsProcessor.h">
+      <Filter>Файлы заголовков\processor</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlPhysicsProcessor.h">
       <Filter>Файлы заголовков\processor</Filter>
     </ClInclude>
   </ItemGroup>

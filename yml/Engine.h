@@ -13,7 +13,7 @@ public:
 	void run();
 	void stop();
 protected:
-	bool is_start = false;
+	bool is_run = false;
 	IScene *scene;
 	std::vector<IProcessor*> *processors;
 };

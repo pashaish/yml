@@ -16,11 +16,14 @@ public:
 	b2BodyType get_body_type() override;
 	void set_body_type(b2BodyType type) override;
 	sf::Vector2f *get_center_position() override;
+	float get_rotation() override;
+	void set_rotation(float rotation) override;
 protected:
 	std::vector<IProp*>* children;
 	sf::Vector2f *position;
 	b2BodyType body_type = b2_staticBody;
-	float density = 0;
-	float friction = 0.05;
+	float density = 1;
+	float rotation = 0;
+	float friction = 0.3;
 };
 

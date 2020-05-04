@@ -3,5 +3,5 @@
 
 class IProcessor {
 public:
-	virtual void process(std::vector<IProp*>* prop) = 0;
+	virtual void process(std::vector<IProp*>* props) = 0;
 };

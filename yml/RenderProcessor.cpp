@@ -3,23 +3,38 @@
 RenderProcessor::RenderProcessor(sf::RenderWindow *window)
 {
 	this->window = window;
-	this->window->setActive();
-	this->window->setFramerateLimit(60);
+	this->window->setFramerateLimit(120);
 }
 
 void RenderProcessor::process(std::vector<IProp*>* props)
 {
-	auto prop_render = [this](IProp* prop)
+	this->window->setActive(true);
+	std::printf("Helo \n");
+
+	while(this->window->isOpen())
 	{
-		prop->render(this->window);
-		for (auto *ch : *prop->get_children())
+		auto prop_render = [this](IProp* prop)
 		{
-			ch->render(this->window);
+			prop->render(this->window);
+			for (auto *ch : *prop->get_children())
+			{
+				ch->render(this->window);
+			}
+		};
+		auto* evnt = new sf::Event();
+
+		while (this->window->pollEvent(*evnt))
+		{
+			std::printf("Helo \n");
 		}
-	};
-	this->window->clear();
-	for (IProp *prop : *props) {
-		prop_render(prop);
+		this->window->clear();
+
+		for (IProp *prop : *props) {
+			prop_render(prop);
+		}
+		
+		this->window->display();
 	}
-	this->window->display();
+
+	this->window->setActive(false);
 }
