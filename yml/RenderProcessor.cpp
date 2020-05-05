@@ -9,11 +9,8 @@ RenderProcessor::RenderProcessor(sf::RenderWindow *window)
 void RenderProcessor::process(std::vector<IProp*>* props)
 {
 	this->window->setActive(true);
-	std::printf("Helo \n");
 
-	while(this->window->isOpen())
-	{
-		auto prop_render = [this](IProp* prop)
+	auto prop_render = [this](IProp* prop)
 		{
 			prop->render(this->window);
 			for (auto *ch : *prop->get_children())
@@ -21,20 +18,12 @@ void RenderProcessor::process(std::vector<IProp*>* props)
 				ch->render(this->window);
 			}
 		};
-		auto* evnt = new sf::Event();
+	this->window->clear();
 
-		while (this->window->pollEvent(*evnt))
-		{
-			std::printf("Helo \n");
-		}
-		this->window->clear();
-
-		for (IProp *prop : *props) {
-			prop_render(prop);
-		}
-		
-		this->window->display();
+	for (IProp *prop : *props) {
+		prop_render(prop);
 	}
-
+	
+	this->window->display();
 	this->window->setActive(false);
 }

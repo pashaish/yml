@@ -1,8 +1,9 @@
 ﻿#include <iostream>
 #include "Engine.h"
+#include "PhysicsProcessor.h"
+#include "PhysicsController.h"
 #include "Scene.h"
 #include "RenderProcessor.h"
-#include "ControlPhysicsProcessor.h"
 #include "Rect.h"
 
 int main()
@@ -10,15 +11,15 @@ int main()
 	setlocale(LC_ALL, "ru");
 
 	auto *ground = new Rect(
-		new sf::Vector2f(20, 400),
-		new sf::Vector2f(300, 50),
+		new sf::Vector2f(0, 100),
+		new sf::Vector2f(150, 20),
 		new std::vector<IProp*>({})
 	);
 	ground->set_body_type(b2_staticBody);
 
 	auto* rect = new Rect(
-		new sf::Vector2f(140, 10),
-		new sf::Vector2f(100, 200),
+		new sf::Vector2f(10, 10),
+		new sf::Vector2f(150, 20),
 		new std::vector<IProp*>({})
 	);
 	
@@ -26,6 +27,9 @@ int main()
 		sf::VideoMode(800, 600),
 		"Title"
 	);
+
+	auto* phys_processor = new PhysicsProcessor();
+	
 	window->setActive(false);
 	
 	auto *engine = new Engine(
@@ -36,15 +40,16 @@ int main()
 			})
 		),
 		new std::vector<IProcessor*>({
-			new PhysicsProcessor(),
-			// new ControlPhysicsProcessor(
-				// window,
-				// rect
-			// ),
+			phys_processor,
 			new RenderProcessor(
 				window
 			)
-		})
+		}),
+		new PhysicsController(
+			rect,
+			window,
+			phys_processor
+		)
 	);
 
 	engine->run();

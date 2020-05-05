@@ -18,12 +18,15 @@ public:
 	sf::Vector2f *get_center_position() override;
 	float get_rotation() override;
 	void set_rotation(float rotation) override;
+	float get_restitution() override;
+	void set_restitution(float restitution) override;
 protected:
 	std::vector<IProp*>* children;
 	sf::Vector2f *position;
 	b2BodyType body_type = b2_staticBody;
-	float density = 1;
-	float rotation = 0;
-	float friction = 0.3;
+	float density = 0.2;
+	float rotation = 16;
+	float friction = 0.1;
+	float restitution = 0.2;
 };
 

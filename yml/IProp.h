@@ -13,6 +13,8 @@ public:
 	virtual void set_rotation(float rotation) = 0;
 	virtual b2Shape* create_shape() = 0;
 	virtual b2BodyType get_body_type() = 0;
+	virtual float get_restitution() = 0;
+	virtual void set_restitution(float restitution) = 0;
 	virtual void set_body_type(b2BodyType type) = 0;
 	virtual float get_friction() = 0;
 	virtual void set_friction(float friction) = 0;

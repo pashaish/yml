@@ -3,6 +3,12 @@
 #include <mutex>
 
 
+Engine::Engine(IScene* scene, std::vector<IProcessor*>* processors, IController* controller) {
+	this->scene = scene;
+	this->processors = processors;
+	this->controller = controller;
+}
+
 void Engine::run()
 {
 	this->is_run = true;
@@ -25,6 +31,11 @@ void Engine::run()
 		};
 		auto* thread = new std::thread(threadCallback);
 		threads.push_back(thread);
+	}
+	while (this->is_run)
+	{
+		this->controller->process();
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 120));
 	}
 	for (auto* thread : threads)
 	{

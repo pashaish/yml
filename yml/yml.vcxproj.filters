@@ -34,6 +34,12 @@
     <Filter Include="Исходные файлы\prop">
       <UniqueIdentifier>{331fc5c7-5538-495f-96e1-8c3728da7c0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\controller">
+      <UniqueIdentifier>{07cb7cc0-6fcc-4255-a590-002167eeb169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\controller">
+      <UniqueIdentifier>{0b08b66e-6f19-4020-8997-31711189929b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yml.cpp">
@@ -57,8 +63,8 @@
     <ClCompile Include="PhysicsProcessor.cpp">
       <Filter>Исходные файлы\processor</Filter>
     </ClCompile>
-    <ClCompile Include="ControlPhysicsProcessor.cpp">
-      <Filter>Исходные файлы\processor</Filter>
+    <ClCompile Include="PhysicsController.cpp">
+      <Filter>Исходные файлы\controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,8 +98,11 @@
     <ClInclude Include="PhysicsProcessor.h">
       <Filter>Файлы заголовков\processor</Filter>
     </ClInclude>
-    <ClInclude Include="ControlPhysicsProcessor.h">
-      <Filter>Файлы заголовков\processor</Filter>
+    <ClInclude Include="IController.h">
+      <Filter>Файлы заголовков\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsController.h">
+      <Filter>Файлы заголовков\controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

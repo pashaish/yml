@@ -70,3 +70,13 @@ void Prop::set_rotation(float rotation)
 {
 	this->rotation = rotation;
 }
+
+float Prop::get_restitution()
+{
+	return this->restitution;
+}
+
+void Prop::set_restitution(float restitution)
+{
+	this->restitution = restitution;
+}

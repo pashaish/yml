@@ -9,9 +9,9 @@ class PhysicsProcessor :
 public:
 	PhysicsProcessor();
 	void process(std::vector<IProp*>* prop) override;
+	b2Body* get_body(IProp* prop) const;
 protected:
 	b2World* world;
 	std::map<IProp*, b2Body*>* bodies;
-	b2Body* get_body(IProp* prop) const;
 };
 

@@ -18,8 +18,6 @@ void Rect::render(sf::RenderWindow* window)
 b2Shape* Rect::create_shape()
 {
 	auto* rect = new b2PolygonShape();
-
-	//rect->SetAsBox(this->size->x / 2, this->size->y / 2, b2Vec2(this->size->x / 2, this->size->y / 2), 0);
 	
 	b2Vec2 points[4] = {
 		b2Vec2(0, 0),
