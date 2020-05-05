@@ -26,7 +26,7 @@ void Engine::run()
 			while (this->is_run)
 			{
 				processor->process(this->scene->get_props());
-				std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 120));
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			}
 		};
 		auto* thread = new std::thread(threadCallback);
@@ -35,7 +35,7 @@ void Engine::run()
 	while (this->is_run)
 	{
 		this->controller->process();
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000 / 120));
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 	for (auto* thread : threads)
 	{
