@@ -1,5 +1,7 @@
 #include "PhysicsController.h"
 
+#include <iostream>
+
 PhysicsController::PhysicsController(IProp* control_prop, sf::RenderWindow* window, PhysicsProcessor* processor)
 {
 	this->control_prop = control_prop;
@@ -10,13 +12,36 @@ PhysicsController::PhysicsController(IProp* control_prop, sf::RenderWindow* wind
 void PhysicsController::process()
 {
 	auto* evnt = new sf::Event();
+	auto* body = this->processor->get_body(this->control_prop);
 
 	while (this->window->pollEvent(*evnt))
 	{
-		if (evnt->key.code == sf::Keyboard::Space)
+		switch (evnt->type)
 		{
-			auto* body = this->processor->get_body(this->control_prop);
-			body->ApplyLinearImpulseToCenter(b2Vec2(350, 0), true);
+		case sf::Event::Closed:
+			*this->is_run = false;
+			break;
+		case sf::Event::KeyPressed:
+			this->is_left = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+			this->is_right = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+			this->is_space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+			break;
 		}
 	}
+	auto velocity = body->GetLinearVelocity();
+	
+	if (this->is_left)
+	{
+		velocity.x = -10;
+	}
+	if (this->is_right)
+	{
+		velocity.x = 10;
+	}
+	if (this->is_space)
+	{
+		velocity.y -= 1;
+	}
+
+	body->SetLinearVelocity(velocity);
 }

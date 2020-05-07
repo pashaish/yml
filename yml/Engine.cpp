@@ -14,11 +14,12 @@ void Engine::run()
 	this->is_run = true;
 
 	std::vector<std::thread*> threads;
+	this->controller->is_run = &this->is_run;
 
 	for (auto* processor : *this->processors)
 	{
+		processor->is_run = &this->is_run;
 		auto* mtx = new std::mutex();
-
 		auto threadCallback = [processor, this, mtx]()
 		{
 			new std::lock_guard<std::mutex>(*mtx);

@@ -5,8 +5,9 @@
 
 PhysicsProcessor::PhysicsProcessor()
 {
-	this->world = new b2World(b2Vec2(0, 10));
+	this->world = new b2World(b2Vec2(0, 25));
 	this->bodies = new std::map<IProp*, b2Body*>();
+	
 }
 
 void PhysicsProcessor::process(std::vector<IProp*>* props)
@@ -55,17 +56,13 @@ b2Body* PhysicsProcessor::get_body(IProp* prop) const
 		|| prop->get_friction() != fixture->GetFriction()
 		)
 	{
-		
 		auto* fixture_def = new b2FixtureDef();
 		fixture_def->shape = prop->create_shape();
-		fixture_def->restitution = 0;
-		
+		fixture_def->restitution = prop->get_restitution();
 		fixture_def->density = prop->get_density();
 		fixture_def->friction = prop->get_friction();
-		
 		body->DestroyFixture(fixture);
 		body->SetType(prop->get_body_type());
-		
 		body->CreateFixture(fixture_def);
 	}
 	

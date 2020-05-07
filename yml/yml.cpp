@@ -19,7 +19,7 @@ int main()
 
 	auto* rect = new Rect(
 		new sf::Vector2f(10, 10),
-		new sf::Vector2f(150, 20),
+		new sf::Vector2f(30, 30),
 		new std::vector<IProp*>({})
 	);
 	

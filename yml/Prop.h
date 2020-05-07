@@ -25,7 +25,7 @@ protected:
 	sf::Vector2f *position;
 	b2BodyType body_type = b2_staticBody;
 	float density = 0.2;
-	float rotation = 16;
+	float rotation = 0;
 	float friction = 0.1;
 	float restitution = 0.2;
 };

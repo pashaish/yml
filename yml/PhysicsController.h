@@ -12,5 +12,8 @@ protected:
 	PhysicsProcessor* processor;
 	IProp* control_prop;
 	sf::RenderWindow* window;
+	bool is_left;
+	bool is_right;
+	bool is_space;
 };
 
