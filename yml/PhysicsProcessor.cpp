@@ -19,6 +19,13 @@ void PhysicsProcessor::process(std::vector<IProp*>* props)
 		auto* body = this->get_body(prop);
 		const auto pos = body->GetPosition();
 
+		// float resist = 0.1;
+		//
+		// auto l_vel = body->GetLinearVelocity();
+		// sf::Vector2f abs_vec(std::abs(l_vel.x), std::abs(l_vel.y));
+
+		// body->SetLinearVelocity(b2Vec2(l_vel.x - resist * abs_vec.x, l_vel.y - resist * abs_vec.y));
+		
 		prop->set_position(new sf::Vector2f(pos.x, pos.y));
 		prop->set_rotation(body->GetAngle() * (180 / M_PI));
 	}
@@ -56,6 +63,8 @@ b2Body* PhysicsProcessor::get_body(IProp* prop) const
 		|| prop->get_friction() != fixture->GetFriction()
 		)
 	{
+		body->SetLinearDamping(0.5);
+		body->SetAngularDamping(0.5);
 		auto* fixture_def = new b2FixtureDef();
 		fixture_def->shape = prop->create_shape();
 		fixture_def->restitution = prop->get_restitution();

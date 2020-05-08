@@ -21,13 +21,12 @@ void PhysicsController::process()
 		case sf::Event::Closed:
 			*this->is_run = false;
 			break;
-		case sf::Event::KeyPressed:
-			this->is_left = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
-			this->is_right = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
-			this->is_space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
-			break;
 		}
 	}
+	this->is_left = sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+	this->is_right = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+	this->is_space = sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+
 	auto velocity = body->GetLinearVelocity();
 	
 	if (this->is_left)
@@ -40,8 +39,8 @@ void PhysicsController::process()
 	}
 	if (this->is_space)
 	{
-		velocity.y -= 1;
+		velocity.y = -20;
 	}
 
 	body->SetLinearVelocity(velocity);
-}
+}  

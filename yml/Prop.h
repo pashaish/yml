@@ -24,9 +24,9 @@ protected:
 	std::vector<IProp*>* children;
 	sf::Vector2f *position;
 	b2BodyType body_type = b2_staticBody;
-	float density = 0.2;
+	float density = 1;
 	float rotation = 0;
-	float friction = 0.1;
+	float friction = 0.5;
 	float restitution = 0.2;
 };
 
