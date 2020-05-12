@@ -1,5 +1,6 @@
 #include "PhysicsProcessor.h"
 #include <iostream>
+#include <thread>
 #define M_PI 3.14159265358979323846
 
 
@@ -7,29 +8,25 @@ PhysicsProcessor::PhysicsProcessor()
 {
 	this->world = new b2World(b2Vec2(0, 25));
 	this->bodies = new std::map<IProp*, b2Body*>();
-	
+	this->is_cycle = true;
 }
 
 void PhysicsProcessor::process(std::vector<IProp*>* props)
 {
-	this->world->Step(1.0f / 120.0f, 6, 2);
-
-	for (auto* prop : *props)
+	do
 	{
-		auto* body = this->get_body(prop);
-		const auto pos = body->GetPosition();
+		this->world->Step(1.0f / 120.0f, 6, 2);
 
-		// float resist = 0.1;
-		//
-		// auto l_vel = body->GetLinearVelocity();
-		// sf::Vector2f abs_vec(std::abs(l_vel.x), std::abs(l_vel.y));
+		for (auto* prop : *props)
+		{
+			auto* body = this->get_body(prop);
+			const auto pos = body->GetPosition();
 
-		// body->SetLinearVelocity(b2Vec2(l_vel.x - resist * abs_vec.x, l_vel.y - resist * abs_vec.y));
-		
-		prop->set_position(new sf::Vector2f(pos.x, pos.y));
-		prop->set_rotation(body->GetAngle() * (180 / M_PI));
-	}
-
+			prop->set_position(new sf::Vector2f(pos.x, pos.y));
+			prop->set_rotation(body->GetAngle() * (180 / M_PI));
+		}
+		std::this_thread::sleep_for(std::chrono::microseconds(10));
+	} while (this->is_cycle);
 }
 
 b2Body* PhysicsProcessor::get_body(IProp* prop) const
@@ -55,6 +52,8 @@ b2Body* PhysicsProcessor::get_body(IProp* prop) const
 	{
 		body = this->bodies->at(prop);
 	}
+
+	sf::Mouse::isButtonPressed(sf::Mouse::Button());
 
 	auto* fixture = body->GetFixtureList();
 	

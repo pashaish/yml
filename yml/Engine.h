@@ -7,13 +7,12 @@
 class Engine
 {
 public:
-	Engine(IScene* scene, std::vector<IProcessor*>* processors, IController* controller);
+	Engine(IScene* scene, std::vector<IProcessor*>* processors);
 	void run();
 	void stop();
 protected:
 	bool is_run = false;
 	IScene *scene;
 	std::vector<IProcessor*> *processors;
-	IController* controller;
 };
 

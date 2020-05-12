@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include "Engine.h"
 #include "PhysicsProcessor.h"
-#include "PhysicsController.h"
+#include "PhysControlProcessor.h"
 #include "Scene.h"
 #include "RenderProcessor.h"
 #include "Rect.h"
@@ -23,15 +23,6 @@ int main()
 		new std::vector<IProp*>({})
 	);
 	
-	auto* window = new sf::RenderWindow(
-		sf::VideoMode(800, 600),
-		"Title"
-	);
-
-	auto* phys_processor = new PhysicsProcessor();
-	
-	window->setActive(false);
-	
 	auto *engine = new Engine(
 		new Scene(
 			new std::vector<IProp*>({
@@ -40,16 +31,17 @@ int main()
 			})
 		),
 		new std::vector<IProcessor*>({
-			phys_processor,
+			new PhysControlProcessor(
+				new PhysicsProcessor(),
+				rect
+			),
 			new RenderProcessor(
-				window
+				new sf::RenderWindow(
+					sf::VideoMode(800, 600),
+					"Title"
+				)
 			)
-		}),
-		new PhysicsController(
-			rect,
-			window,
-			phys_processor
-		)
+		})
 	);
 
 	engine->run();

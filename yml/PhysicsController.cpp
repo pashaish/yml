@@ -29,13 +29,13 @@ void PhysicsController::process()
 
 	auto velocity = body->GetLinearVelocity();
 	
-	if (this->is_left)
+	if (this->is_left && std::abs(velocity.x) > 10)
 	{
-		velocity.x = -10;
+		velocity.x -= 1;
 	}
-	if (this->is_right)
+	if (this->is_right && std::abs(velocity.x) > 10)
 	{
-		velocity.x = 10;
+		velocity.x += 1;
 	}
 	if (this->is_space)
 	{

@@ -7,7 +7,7 @@ class RenderProcessor :
 {
 public:
 	RenderProcessor(sf::RenderWindow *window);
-	void process(std::vector<IProp*>* prop) override;
+	void process(std::vector<IProp*>* props) override;
 private:
 	sf::RenderWindow *window;
 };
