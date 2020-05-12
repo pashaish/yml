@@ -13,8 +13,8 @@ void PhysControlProcessor::process(std::vector<IProp*>* props)
 	{
 		auto* body = this->processor->get_body(this->control_prop);
 		auto velocity = body->GetLinearVelocity();
-		bool is_left = sf::Keyboard::isKeyPressed(sf::Keyboard::A) && std::abs(velocity.x) < 14;
-		bool is_right = sf::Keyboard::isKeyPressed(sf::Keyboard::D) && std::abs(velocity.x) < 14;
+		bool is_left = sf::Keyboard::isKeyPressed(sf::Keyboard::A) && velocity.x > -14;
+		bool is_right = sf::Keyboard::isKeyPressed(sf::Keyboard::D) && velocity.x < 14;
 		
 		if (is_left)
 		{

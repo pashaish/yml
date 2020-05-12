@@ -21,7 +21,6 @@ void Engine::run()
 		{
 			mtx->lock();
 			processor->process(this->scene->get_props());
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			mtx->unlock();
 		};
 		auto* thread = new std::thread(threadCallback);
